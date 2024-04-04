@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hook Mega Sena</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState } = React;
+
+        const HookMegaSena = () => {
+            const [number, setNumber] = useState('');
+            const [numbers, setNumbers] = useState([]);
+
+            const sortearNumero = () => {
+                if (numbers.length === 6) {
+                    alert('Já temos 6 números sorteados!');
+                    return;
+                }
+
+                const newNumber = Math.floor(Math.random() * 60) + 1;
+                setNumber(newNumber);
+                setNumbers([...numbers, newNumber]);
+            };
+
+            return (
+                <div>
+                    <h1>Mega Sena Sorteador</h1>
+                    <button onClick={sortearNumero}>Sortear Número</button>
+                    <h2>Último número sorteado: {number}</h2>
+                    <h2>Números sorteados: {numbers.join(', ')}</h2>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<HookMegaSena />, document.getElementById('root'));
+    </script>
+</body>
+</html>
